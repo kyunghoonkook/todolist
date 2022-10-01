@@ -1,22 +1,26 @@
 import React, { useState } from "react";
 import "./style.css";
 
+let num = 0;
 function Form() {
-  const state = {
+  const initValue = {
     id: 0,
     title: "",
     body: "",
     isDone: false,
   };
-  const [toDo, setToDo] = useState(state);
+  const [toDo, setToDo] = useState(initValue);
   const [toDos, setToDos] = useState([]);
-  const onChange = (event) => setToDo(event.target.value);
+  const onChange = (key, value) => setToDo({ ...toDo, [key]: value });
+  // []를 해줘야 쓸 수 있음 [key]:value를 toDo 배열에 넣음
+  console.log(toDo);
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
     if (toDo.title === "" || toDo.body === "") return;
-    setToDo("");
-    setToDos((curr) => [toDo, ...curr]);
+    setToDos([...toDos, { ...toDo, id: num }]);
+    setToDo(initValue);
+    num++;
     // sdafas
   };
   console.log(toDos);
@@ -28,7 +32,7 @@ function Form() {
           type="text"
           className="add-input"
           name="title"
-          onChange={onChange}
+          onChange={(event) => onChange("title", event.target.value)}
           value={toDo.title}
         />
         <label className="form-label">내용</label>
@@ -36,12 +40,17 @@ function Form() {
           type="text"
           className="add-input"
           name="body"
-          onChange={onChange}
+          onChange={(event) => onChange("body", event.target.value)}
           value={toDo.body}
         />
       </div>
 
       <button className="add-button">추가하기</button>
+      <ul>
+        {toDos.map((todo) => {
+          return <li>{todo.title}</li>;
+        })}
+      </ul>
     </form>
   );
 }
