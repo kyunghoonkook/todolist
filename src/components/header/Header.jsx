@@ -3,8 +3,9 @@ import "./style.css";
 function Header() {
   return (
     <div className="container">
-      <div>My Todo List</div>
-      <div>React</div>
+      <div>
+        <p>My Todo List</p>
+      </div>
     </div>
   );
 }

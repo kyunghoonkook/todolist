@@ -1,44 +1,39 @@
-import React from "react";
 import Todo from "../todo/Todo";
 import "./style.css";
 
-function List({ todos, setTodos }) {
-  const onDeleteHanlder = (todoId) => {
-    const newTodos = todos.filter((todo) => {
-      return todo.id !== todoId;
-    });
-
-    setTodos(newTodos);
+function List({ toDos, setToDos }) {
+  const removeTodo = (id) => {
+    // id값 체크해서 같지 않으면 업데이트해서 지워줌
+    let updatedTodos = [...toDos].filter((toDo) => toDo.id !== id);
+    setToDos(updatedTodos);
   };
-
-  const onEditHandler = (todoId) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === todoId) {
+  const editHandler = (id) => {
+    const updatedTodos = toDos.map((toDo) => {
+      if (toDo.id === id) {
         return {
-          ...todo,
-          isDone: !todo.isDone,
+          ...toDo,
+          isDone: !toDo.isDone,
         };
       } else {
-        return { ...todo };
+        return { ...toDo };
       }
     });
 
-    setTodos(newTodos);
+    setToDos(updatedTodos);
   };
-
   return (
     <div className="list-container">
       <h2 className="list-title">Working.. 🔥</h2>
       <div className="list-wrapper">
-        {todos.map((todo) => {
-          if (!todo.isDone) {
+        {toDos.map((toDo) => {
+          if (!toDo.isDone) {
             return (
               <Todo
-                todo={todo}
-                key={todo.id}
-                setTodos={setTodos}
-                onDeleteHanlder={onDeleteHanlder}
-                onEditHandler={onEditHandler}
+                toDo={toDo}
+                key={toDo.id}
+                isDone={toDo.isDone}
+                removeTodo={removeTodo}
+                editHandler={editHandler}
               />
             );
           } else {
@@ -48,15 +43,15 @@ function List({ todos, setTodos }) {
       </div>
       <h2 className="list-title">Done..! 🎉</h2>
       <div className="list-wrapper">
-        {todos.map((todo) => {
-          if (todo.isDone) {
+        {toDos.map((toDo) => {
+          if (toDo.isDone) {
             return (
               <Todo
-                todo={todo}
-                key={todo.id}
-                setTodos={setTodos}
-                onDeleteHanlder={onDeleteHanlder}
-                onEditHandler={onEditHandler}
+                toDo={toDo}
+                key={toDo.id}
+                isDone={toDo.isDone}
+                removeTodo={removeTodo}
+                editHandler={editHandler}
               />
             );
           } else {

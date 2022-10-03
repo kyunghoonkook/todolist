@@ -1,25 +1,25 @@
-import React from "react";
+import "../list/List";
 import "./style.css";
-
-function Todo({ todo, onDeleteHanlder, onEditHandler }) {
+function Todo({ toDo, removeTodo, editHandler }) {
+  console.log(toDo);
   return (
     <div className="todo-container">
       <div>
-        <h2 className="todo-title">{todo.title}</h2>
-        <div>{todo.body}</div>
+        <h2 className="todo-title">{toDo.title}</h2>
+        <div>{toDo.body}</div>
       </div>
       <div className="button-set">
         <button
           className="todo-delete-button button"
-          onClick={() => onDeleteHanlder(todo.id)}
+          onClick={() => removeTodo(toDo.id)}
         >
           삭제하기
         </button>
         <button
           className="todo-complete-button button"
-          onClick={() => onEditHandler(todo.id)}
+          onClick={() => editHandler(toDo.id)}
         >
-          {todo.isDone ? "취소" : "완료"}
+          {toDo.isDone ? "취소" : "완료"}
         </button>
       </div>
     </div>

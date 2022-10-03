@@ -1,38 +1,50 @@
 import React, { useState } from "react";
+import List from "../list/List";
 import "./style.css";
-
-let num = 0;
+let num = 1;
 function Form() {
   const initValue = {
-    id: 0,
+    id: num,
     title: "",
     body: "",
     isDone: false,
   };
   const [toDo, setToDo] = useState(initValue);
+  const [style, setStyle] = useState("add-form");
   const [toDos, setToDos] = useState([]);
-  const onChange = (key, value) => setToDo({ ...toDo, [key]: value });
-  // []를 해줘야 쓸 수 있음 [key]:value를 toDo 배열에 넣음
-  console.log(toDo);
-
-  const onSubmitHandler = (event) => {
-    event.preventDefault();
-    if (toDo.title === "" || toDo.body === "") return;
-    setToDos([...toDos, { ...toDo, id: num }]);
-    setToDo(initValue);
-    num++;
-    // sdafas
+  const changeHandler = (e) => {
+    const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
+    setToDo({
+      ...toDo, // 기존의 input 객체를 복사한 뒤
+      [name]: value, // name 키를 가진 값을 value 로 설정
+    });
   };
-  console.log(toDos);
+  const changeStyle = () => {
+    setStyle("add-form-change");
+  };
+
+  const handleAddToDo = () => {
+    if (toDo.title === "" || toDo.body === "") return;
+
+    // toDo객체를 toDos배열로 id에 1씩 추가
+    setToDos([...toDos, { ...toDo, id: num++ }]);
+    // console.log(toDo);
+    setToDo(initValue);
+  };
+
+  const ClickHandler = () => {
+    handleAddToDo();
+    changeStyle();
+  };
   return (
-    <form className="add-form" onSubmit={onSubmitHandler}>
+    <form className={style}>
       <div className="input-group">
         <label className="form-label">제목</label>
         <input
           type="text"
           className="add-input"
           name="title"
-          onChange={(event) => onChange("title", event.target.value)}
+          onChange={changeHandler}
           value={toDo.title}
         />
         <label className="form-label">내용</label>
@@ -40,17 +52,15 @@ function Form() {
           type="text"
           className="add-input"
           name="body"
-          onChange={(event) => onChange("body", event.target.value)}
+          onChange={changeHandler}
           value={toDo.body}
         />
+        <button className="add-button" onClick={ClickHandler} type="button">
+          추가하기
+        </button>
       </div>
 
-      <button className="add-button">추가하기</button>
-      <ul>
-        {toDos.map((todo) => {
-          return <li>{todo.title}</li>;
-        })}
-      </ul>
+      <List toDos={toDos} setToDos={setToDos} style={style} />
     </form>
   );
 }
