@@ -1,7 +1,6 @@
 import "../list/List";
 import "./style.css";
 function Todo({ toDo, removeToDo, editHandler }) {
-  console.log(toDo);
   return (
     <div className="todo-container">
       <div>

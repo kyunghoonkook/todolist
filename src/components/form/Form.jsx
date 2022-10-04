@@ -39,16 +39,22 @@ function Form({ toDos, setToDos }) {
   return (
     <form className="add-form" onSubmit={handleAddToDo}>
       <div className="input-group">
-        <label className="form-label">제목</label>
+        <label className="form-label" htmlFor="title">
+          제목
+        </label>
         <input
+          id="title"
           type="text"
           className="add-input"
           name="title"
           onChange={changeHandler}
           value={toDo.title}
         />
-        <label className="form-label">내용</label>
+        <label className="form-label" htmlFor="body">
+          내용
+        </label>
         <input
+          id="body"
           type="text"
           className="add-input"
           name="body"
