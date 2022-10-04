@@ -1,6 +1,6 @@
 import "../list/List";
 import "./style.css";
-function Todo({ toDo, removeTodo, editHandler }) {
+function Todo({ toDo, removeToDo, editHandler }) {
   console.log(toDo);
   return (
     <div className="todo-container">
@@ -11,7 +11,7 @@ function Todo({ toDo, removeTodo, editHandler }) {
       <div className="button-set">
         <button
           className="todo-delete-button button"
-          onClick={() => removeTodo(toDo.id)}
+          onClick={() => removeToDo(toDo.id)}
         >
           삭제하기
         </button>
@@ -19,7 +19,7 @@ function Todo({ toDo, removeTodo, editHandler }) {
           className="todo-complete-button button"
           onClick={() => editHandler(toDo.id)}
         >
-          {toDo.isDone ? "취소" : "완료"}
+          {!toDo.isDone ? "완료" : "취소"}
         </button>
       </div>
     </div>

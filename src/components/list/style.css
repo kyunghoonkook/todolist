@@ -1,5 +1,8 @@
 .list-container {
-  padding: 0 24px;
+  padding: 10px 24px;
+  background-color: #d1ebd7;
+  border-radius: 10px;
+  transition: 0.5s;
 }
 
 .list-wrapper {

@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import List from "../list/List";
 import "./style.css";
-let num = 1;
-function Form() {
+
+function Form({ toDos, setToDos }) {
   const initValue = {
-    id: num,
+    id: "",
     title: "",
     body: "",
     isDone: false,
   };
   const [toDo, setToDo] = useState(initValue);
-  const [style, setStyle] = useState("add-form");
-  const [toDos, setToDos] = useState([]);
+  // const [style, setStyle] = useState("add-form");
+
   const changeHandler = (e) => {
     const { value, name } = e.target; // 우선 e.target 에서 name 과 value 를 추출
     setToDo({
@@ -19,25 +18,26 @@ function Form() {
       [name]: value, // name 키를 가진 값을 value 로 설정
     });
   };
-  const changeStyle = () => {
-    setStyle("add-form-change");
-  };
+  // const changeStyle = () => {
+  //   setStyle("add-form-change");
+  // };
 
-  const handleAddToDo = () => {
+  const handleAddToDo = (e) => {
+    e.preventDefault();
     if (toDo.title === "" || toDo.body === "") return;
 
     // toDo객체를 toDos배열로 id에 1씩 추가
-    setToDos([...toDos, { ...toDo, id: num++ }]);
+    setToDos([...toDos, { ...toDo, id: Math.random().toString() }]);
     // console.log(toDo);
     setToDo(initValue);
   };
 
-  const ClickHandler = () => {
-    handleAddToDo();
-    changeStyle();
-  };
+  // const clickHandler = () => {
+  //   handleAddToDo();
+  //   changeStyle();
+  // };
   return (
-    <form className={style}>
+    <form className="add-form" onSubmit={handleAddToDo}>
       <div className="input-group">
         <label className="form-label">제목</label>
         <input
@@ -55,12 +55,10 @@ function Form() {
           onChange={changeHandler}
           value={toDo.body}
         />
-        <button className="add-button" onClick={ClickHandler} type="button">
+        <button className="add-button" type="submit">
           추가하기
         </button>
       </div>
-
-      <List toDos={toDos} setToDos={setToDos} style={style} />
     </form>
   );
 }

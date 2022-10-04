@@ -5,10 +5,9 @@
   justify-content: space-between;
   padding: 30px;
   gap: 20px;
-  height: 180px;
   transition: 0.5s;
 }
-.add-form-change {
+/* .add-form-change {
   height: 650px;
   background-color: #c8e6c9;
   border-radius: 12px;
@@ -17,7 +16,7 @@
   padding: 30px;
   gap: 20px;
   transition: 0.5s;
-}
+} */
 .input-group {
   display: flex;
   justify-content: center;
