@@ -8,7 +8,7 @@ function List({ toDos, setToDos }) {
     setToDos(updatedToDos);
   };
   const editHandler = (id) => {
-    const updatedToDos = toDos.map((toDo) => {
+    let updatedToDos = [...toDos].map((toDo) => {
       // todo.id랑 id랑 같으면 idDone은 트루고 ...toDo에 들어감
       if (toDo.id === id) {
         return {
