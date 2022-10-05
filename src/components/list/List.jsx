@@ -10,15 +10,17 @@ function List({ toDos, setToDos }) {
   const editHandler = (id) => {
     let updatedToDos = [...toDos].map((toDo) => {
       // todo.id랑 id랑 같으면 idDone은 트루고 ...toDo에 들어감
-      if (toDo.id === id) {
-        return {
-          ...toDo,
-          isDone: !toDo.isDone,
-        };
-        // 아니면 isDone은 false고 배열은 그대로 ... 불변성
-      } else {
-        return { ...toDo };
-      }
+      //   if (toDo.id === id) {
+      //     return {
+      //       ...toDo,
+      //       isDone: !toDo.isDone,
+      //     };
+      //     // 아니면 isDone은 false고 배열은 그대로 ... 불변성
+      //   } else {
+      //     return { ...toDo };
+      //   }
+      // });
+      return { ...toDo, isDone: toDo.id === id ? !toDo.isDone : toDo.isDone };
     });
 
     setToDos(updatedToDos);
